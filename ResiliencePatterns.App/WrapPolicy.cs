@@ -1,3 +1,4 @@
+using System;
 using Polly;
 
 namespace ResiliencePatterns.App
@@ -7,9 +8,20 @@ namespace ResiliencePatterns.App
         public static void Run()
         {
             var wrapPolicy = Policy.Wrap(
-                    FallbackPolicy.GetPolicy(), 
+                    FallbackPolicy.GetGenericPolicy(), 
                     RetryPolicy.GetPolicy<User>()
                 );
+
+            var executionCount = 0;
+            var result = wrapPolicy.Execute(() =>
+            {
+                executionCount++;
+                Console.WriteLine($"Executing action for {executionCount} time");
+                throw new RetryException($"Trowing for execution {executionCount}");
+                return new User("UserFromService");
+            });
+
+            Console.WriteLine($"Result is {result.Name}");
         }
     }
 }

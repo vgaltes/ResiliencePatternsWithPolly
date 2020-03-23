@@ -17,8 +17,15 @@ namespace ResiliencePatterns.App
         public static Polly.Fallback.FallbackPolicy<User> GetPolicy()
         {
             return Policy<User>
-                        .Handle<FallbackException>()
-                        .Fallback<User>(() => new User("defaultUser"));
+                    .Handle<FallbackException>()
+                    .Fallback<User>(() => new User("defaultUser"));
+        }
+
+        public static Polly.Fallback.FallbackPolicy<User> GetGenericPolicy()
+        {
+            return Policy<User>
+                    .Handle<RetryException>()
+                    .Fallback<User>(() => new User("defaultUser"));
         }
     }   
 

@@ -13,6 +13,7 @@ namespace ResiliencePatterns.App
                 case "cache": CachePolicy.Run(); break;
                 case "fallback": FallbackPolicy.Run(); break;
                 case "breaker": await CircuitBreakerPolicy.Run(); break;
+                case "wrap": WrapPolicy.Run(); break;
             }
         }
     }

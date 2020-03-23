@@ -51,13 +51,4 @@ namespace ResiliencePatterns.App
             return 42;
         }
     }
-
-    public class User
-    {
-        public string Name { get; }
-        public User(string name)
-        {
-            Name = name;
-        }
-    }
 }

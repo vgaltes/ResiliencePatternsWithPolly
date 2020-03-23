@@ -23,9 +23,6 @@ namespace ResiliencePatterns.App
             Console.WriteLine($"Result is {result}");
         }
 
-        public static Polly.Retry.RetryPolicy AnotherPolicy(){
-            return Policy.Handle<RetryException>().WaitAndRetry(1, (i,t) =>  TimeSpan.FromSeconds(2));
-        }
         public static RetryPolicy<A> GetPolicy<A>()
         {
             return Policy<A>
